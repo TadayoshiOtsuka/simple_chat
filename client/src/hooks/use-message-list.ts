@@ -1,6 +1,6 @@
-import { websocketAtom } from "./../state/atoms/websocket";
+import { websocketAtom } from "../state/atoms/websocket";
 import { useEffect } from "react";
-import { messageListAtom } from "./../state/atoms/messages";
+import { messageListAtom } from "../state/atoms/messages";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Message } from "../models/message";
 

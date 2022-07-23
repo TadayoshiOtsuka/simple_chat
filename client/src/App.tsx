@@ -1,5 +1,5 @@
-import { MessageInput } from "./components/message_input";
-import { MessageList } from "./components/message_list";
+import { MessageInput } from "./components/MessageInput";
+import { MessageList } from "./components/MessageList";
 
 export const App = () => {
   return (

@@ -1,4 +1,4 @@
-import { useMessageList } from "../hooks/use_message_list";
+import { useMessageList } from "../hooks/use-message-list";
 
 export const MessageList = () => {
   const messageList = useMessageList();

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { websocketAtom } from "./../state/atoms/websocket";
+import { websocketAtom } from "../state/atoms/websocket";
 import { useRecoilValue } from "recoil";
 
 export const useSubmitMessage = () => {

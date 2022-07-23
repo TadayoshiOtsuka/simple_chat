@@ -1,4 +1,4 @@
-import { useSubmitMessage } from "../hooks/use_submit_message";
+import { useSubmitMessage } from "../hooks/use-submit-message";
 
 export const MessageInput = () => {
   const { input, setInput, submit } = useSubmitMessage();
