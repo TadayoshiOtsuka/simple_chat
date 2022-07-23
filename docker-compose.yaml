@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      target: Dev
+    tty: true
+    stdin_open: true
+    ports:
+      - 3000:5173
+    volumes:
+      - type: bind
+        source: "client/src"
+        target: "/usr/app/src"
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: Dev
+    stdin_open: true
+    tty: true
+    ports:
+      - 80:80
+    volumes:
+      - type: bind
+        source: server/src
+        target: /go/app/src
+    # depends_on:
+    #   - mysql
+    #   - redis
+#   mysql:
+#     image: mysql:8.0
+#     environment:
+#       MYSQL_ROOT_PASSWORD: password
+#       MYSQL_DATABASE: db
+#     ports:
+#       - 3306:3306
+#     volumes:
+#       - type: volume
+#         source: mysql-volume
+#         target: /var/lib/mysql
+
+#   redis:
+#     image: redis:7.0.2
+#     command: redis-server --appendonly yes
+#     restart: always
+#     ports:
+#       - 6379:6379
+#     volumes:
+#       - type: volume
+#         source: redis-volume
+#         target: /data
+
+# volumes:
+#   mysql-volume:
+#   redis-volume:
