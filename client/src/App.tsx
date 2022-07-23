@@ -9,9 +9,14 @@ export const App = () => {
 
   return (
     <div>
+      <h1>Simple Chat</h1>
       <div>
-        <input onChange={(e) => setInput(e.target.value)} value={input} />
-        <button onSubmit={submit} />
+        <input
+          onChange={(e) => setInput(e.target.value)}
+          value={input}
+          placeholder="new message"
+        />
+        <button onSubmit={submit}>Submit</button>
       </div>
       <div>
         {messageList.map((m, i) => (

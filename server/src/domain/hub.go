@@ -1,5 +1,7 @@
 package domain
 
+import "log"
+
 type Hub struct {
 	Clients      map[*Client]bool
 	RegisterCh   chan *Client
@@ -30,6 +32,7 @@ func (h *Hub) Run() {
 }
 
 func (h *Hub) register(c *Client) {
+	log.Println("new client joined")
 	h.Clients[c] = true
 }
 

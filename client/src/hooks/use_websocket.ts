@@ -9,6 +9,7 @@ export const useWebsocket = (): WebSocket.w3cwebsocket => {
   useEffect(() => {
     const socket = new WebSocket.w3cwebsocket("ws://localhost:80/ws");
     setWebsocket(socket);
+    socket.onopen = () => console.log("connected");
 
     return () => {
       socket.close();
