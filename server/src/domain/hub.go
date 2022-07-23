@@ -23,8 +23,10 @@ func (h *Hub) Run() {
 		select {
 		case client := <-h.RegisterCh:
 			h.register(client)
+
 		case client := <-h.UnRegisterCh:
 			h.unregister(client)
+
 		case msg := <-h.BroadcastCh:
 			h.broadCast(msg)
 		}

@@ -27,8 +27,8 @@ func (h *WebsocketHandler) Handle(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	c := domain.NewClient(ws)
-	go c.Read(h.hub.BroadcastCh, h.hub.UnRegisterCh)
-	go c.Write()
-	h.hub.RegisterCh <- c
+	client := domain.NewClient(ws)
+	go client.Read(h.hub.BroadcastCh, h.hub.UnRegisterCh)
+	go client.Write()
+	h.hub.RegisterCh <- client
 }
