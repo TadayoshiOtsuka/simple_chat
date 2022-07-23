@@ -1,4 +1,3 @@
-import { Button, CssBaseline, Input } from "@mui/material";
 import { useMessageList } from "./hooks/use_message_list";
 import { useSubmitMessage } from "./hooks/use_submit_message";
 
@@ -10,14 +9,12 @@ export const App = () => {
     <div>
       <h1>Simple Chat</h1>
       <div>
-        <Input
+        <input
           onChange={(e) => setInput(e.target.value)}
           value={input}
           placeholder="new message"
         />
-        <Button variant="contained" onClick={submit}>
-          Submit
-        </Button>
+        <button onClick={submit}>Submit</button>
       </div>
       <div>
         {messageList.map((m, i) => (
