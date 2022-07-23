@@ -5,12 +5,13 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { Message } from "../models/message";
 
 export const useMessageList = (): Message[] => {
-  const [messageList, setMessageList] = useRecoilState(messageListAtom);
   const socket = useRecoilValue(websocketAtom);
+  const [messageList, setMessageList] = useRecoilState(messageListAtom);
 
   useEffect(() => {
-    socket.onmessage = (data) => {
-      setMessageList((currVal) => [...currVal]);
+    socket.onmessage = (msg) => {
+      const content = JSON.parse(msg.data as string);
+      setMessageList((currVal) => [...currVal, { content: content }]);
     };
   }, [socket.onmessage]);
 

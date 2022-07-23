@@ -25,6 +25,7 @@ func (c *Client) Read(broadCast chan<- []byte, unregister chan<- *Client) {
 
 	for {
 		_, jsonMsg, err := c.ws.ReadMessage()
+		log.Println("read", jsonMsg)
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("unexpected close error: %v", err)

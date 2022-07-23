@@ -1,9 +1,7 @@
 import { useMessageList } from "./hooks/use_message_list";
 import { useSubmitMessage } from "./hooks/use_submit_message";
-import { useWebsocket } from "./hooks/use_websocket";
 
 export const App = () => {
-  useWebsocket();
   const messageList = useMessageList();
   const { input, setInput, submit } = useSubmitMessage();
 
@@ -16,7 +14,7 @@ export const App = () => {
           value={input}
           placeholder="new message"
         />
-        <button onSubmit={submit}>Submit</button>
+        <button onClick={submit}>Submit</button>
       </div>
       <div>
         {messageList.map((m, i) => (
