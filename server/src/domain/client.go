@@ -63,6 +63,14 @@ func (c *Client) Write() {
 	}
 }
 
+func (c *Client) publishMessage() {
+	// err := config.Redis.Publish(ctx, room.GetName(), message).Err()
+
+	// if err != nil {
+	//     log.Println(err)
+	// }
+}
+
 func (c *Client) disconnect(unregister chan<- *Client) {
 	unregister <- c
 	c.ws.Close()
