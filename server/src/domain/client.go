@@ -18,7 +18,7 @@ func NewClient(ws *websocket.Conn) *Client {
 	}
 }
 
-func (c *Client) Read(broadCast chan<- []byte, unregister chan<- *Client) {
+func (c *Client) ReadLoop(broadCast chan<- []byte, unregister chan<- *Client) {
 	defer func() {
 		c.disconnect(unregister)
 	}()
@@ -38,7 +38,7 @@ func (c *Client) Read(broadCast chan<- []byte, unregister chan<- *Client) {
 
 }
 
-func (c *Client) Write() {
+func (c *Client) WriteLoop() {
 	defer func() {
 		c.ws.Close()
 	}()
@@ -61,14 +61,6 @@ func (c *Client) Write() {
 			return
 		}
 	}
-}
-
-func (c *Client) publishMessage() {
-	// err := config.Redis.Publish(ctx, room.GetName(), message).Err()
-
-	// if err != nil {
-	//     log.Println(err)
-	// }
 }
 
 func (c *Client) disconnect(unregister chan<- *Client) {

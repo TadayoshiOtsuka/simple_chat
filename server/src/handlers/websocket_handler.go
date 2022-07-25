@@ -13,7 +13,9 @@ type WebsocketHandler struct {
 }
 
 func NewWebsocketHandler(hub *domain.Hub) *WebsocketHandler {
-	return &WebsocketHandler{hub: hub}
+	return &WebsocketHandler{
+		hub: hub,
+	}
 }
 
 func (h *WebsocketHandler) Handle(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +30,7 @@ func (h *WebsocketHandler) Handle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	client := domain.NewClient(ws)
-	go client.Read(h.hub.BroadcastCh, h.hub.UnRegisterCh)
-	go client.Write()
+	go client.ReadLoop(h.hub.BroadcastCh, h.hub.UnRegisterCh)
+	go client.WriteLoop()
 	h.hub.RegisterCh <- client
 }

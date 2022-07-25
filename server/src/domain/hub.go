@@ -18,7 +18,7 @@ func NewHub() *Hub {
 	}
 }
 
-func (h *Hub) Run() {
+func (h *Hub) RunLoop() {
 	for {
 		select {
 		case client := <-h.RegisterCh:

@@ -11,7 +11,7 @@ import (
 
 func main() {
 	hub := domain.NewHub()
-	go hub.Run()
+	go hub.RunLoop()
 
 	http.HandleFunc("/ws", handlers.NewWebsocketHandler(hub).Handle)
 
