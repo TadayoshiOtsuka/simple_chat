@@ -1,7 +1,7 @@
-import { useSubmitMessage } from "../hooks/use-submit-message";
+import { useSendMessage } from "../hooks/use-send-message";
 
 export const MessageInput = () => {
-  const { input, setInput, submit } = useSubmitMessage();
+  const { input, setInput, send } = useSendMessage();
 
   return (
     <div>
@@ -10,7 +10,7 @@ export const MessageInput = () => {
         value={input}
         placeholder="new message"
       />
-      <button onClick={submit}>Submit</button>
+      <button onClick={send}>Send</button>
     </div>
   );
 };

@@ -1,7 +1,5 @@
 package domain
 
-import "log"
-
 type Hub struct {
 	Clients      map[*Client]bool
 	RegisterCh   chan *Client
@@ -28,13 +26,12 @@ func (h *Hub) RunLoop() {
 			h.unregister(client)
 
 		case msg := <-h.BroadcastCh:
-			h.broadCast(msg)
+			h.broadCastToAllClient(msg)
 		}
 	}
 }
 
 func (h *Hub) register(c *Client) {
-	log.Println("new client joined")
 	h.Clients[c] = true
 }
 
@@ -42,7 +39,7 @@ func (h *Hub) unregister(c *Client) {
 	delete(h.Clients, c)
 }
 
-func (h *Hub) broadCast(msg Message) {
+func (h *Hub) broadCastToAllClient(msg Message) {
 	for c := range h.Clients {
 		c.sendCh <- msg
 	}

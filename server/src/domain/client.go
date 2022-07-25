@@ -25,7 +25,6 @@ func (c *Client) ReadLoop(broadCast chan<- Message, unregister chan<- *Client) {
 
 	for {
 		_, jsonMsg, err := c.ws.ReadMessage()
-		log.Println("read", jsonMsg)
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("unexpected close error: %v", err)
@@ -52,8 +51,7 @@ func (c *Client) WriteLoop() {
 		}
 		w.Write(message)
 
-		n := len(c.sendCh)
-		for i := 0; i < n; i++ {
+		for i := 0; i < len(c.sendCh); i++ {
 			w.Write(<-c.sendCh)
 		}
 
