@@ -4,7 +4,7 @@ type Hub struct {
 	Clients      map[*Client]bool
 	RegisterCh   chan *Client
 	UnRegisterCh chan *Client
-	BroadcastCh  chan Message
+	BroadcastCh  chan []byte
 }
 
 func NewHub() *Hub {
@@ -12,7 +12,7 @@ func NewHub() *Hub {
 		Clients:      make(map[*Client]bool),
 		RegisterCh:   make(chan *Client),
 		UnRegisterCh: make(chan *Client),
-		BroadcastCh:  make(chan Message),
+		BroadcastCh:  make(chan []byte),
 	}
 }
 
@@ -39,7 +39,7 @@ func (h *Hub) unregister(c *Client) {
 	delete(h.Clients, c)
 }
 
-func (h *Hub) broadCastToAllClient(msg Message) {
+func (h *Hub) broadCastToAllClient(msg []byte) {
 	for c := range h.Clients {
 		c.sendCh <- msg
 	}
