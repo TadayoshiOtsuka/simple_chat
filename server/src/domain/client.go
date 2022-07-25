@@ -8,17 +8,17 @@ import (
 
 type Client struct {
 	ws     *websocket.Conn
-	sendCh chan Message
+	sendCh chan []byte
 }
 
 func NewClient(ws *websocket.Conn) *Client {
 	return &Client{
 		ws:     ws,
-		sendCh: make(chan Message),
+		sendCh: make(chan []byte),
 	}
 }
 
-func (c *Client) ReadLoop(broadCast chan<- Message, unregister chan<- *Client) {
+func (c *Client) ReadLoop(broadCast chan<- []byte, unregister chan<- *Client) {
 	defer func() {
 		c.disconnect(unregister)
 	}()
