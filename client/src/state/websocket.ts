@@ -9,7 +9,7 @@ const connect = (): Promise<WebSocket.w3cwebsocket> => {
       resolve(socket);
     };
     socket.onclose = () => {
-      console.log("trying reconnecting...");
+      console.log("reconnecting...");
       connect();
     };
     socket.onerror = (err) => {
@@ -28,5 +28,5 @@ const connectWebsocketSelector = selector({
 
 export const websocketAtom = atom<WebSocket.w3cwebsocket>({
   key: "websocket",
-  default: undefined,
+  default: connectWebsocketSelector,
 });
