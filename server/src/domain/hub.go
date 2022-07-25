@@ -1,12 +1,10 @@
 package domain
 
-import "log"
-
 type Hub struct {
 	Clients      map[*Client]bool
 	RegisterCh   chan *Client
 	UnRegisterCh chan *Client
-	BroadcastCh  chan []byte
+	BroadcastCh  chan Message
 }
 
 func NewHub() *Hub {
@@ -14,7 +12,7 @@ func NewHub() *Hub {
 		Clients:      make(map[*Client]bool),
 		RegisterCh:   make(chan *Client),
 		UnRegisterCh: make(chan *Client),
-		BroadcastCh:  make(chan []byte),
+		BroadcastCh:  make(chan Message),
 	}
 }
 
@@ -28,13 +26,12 @@ func (h *Hub) RunLoop() {
 			h.unregister(client)
 
 		case msg := <-h.BroadcastCh:
-			h.broadCast(msg)
+			h.broadCastToAllClient(msg)
 		}
 	}
 }
 
 func (h *Hub) register(c *Client) {
-	log.Println("new client joined")
 	h.Clients[c] = true
 }
 
@@ -42,7 +39,7 @@ func (h *Hub) unregister(c *Client) {
 	delete(h.Clients, c)
 }
 
-func (h *Hub) broadCast(msg []byte) {
+func (h *Hub) broadCastToAllClient(msg Message) {
 	for c := range h.Clients {
 		c.sendCh <- msg
 	}
