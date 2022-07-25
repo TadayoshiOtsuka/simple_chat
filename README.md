@@ -1,5 +1,7 @@
 # Simple Chat
 
+Simple real-time chat app using React, Go, Websocket
+
 launch
 
 ```
