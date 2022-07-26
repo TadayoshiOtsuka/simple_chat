@@ -3,9 +3,12 @@ import * as WebSocket from "websocket";
 
 const connect = (): Promise<WebSocket.w3cwebsocket> => {
   return new Promise((resolve, reject) => {
-    const socket = new WebSocket.w3cwebsocket("ws://localhost:80/ws");
+    const port = import.meta.env.VITE_WS_PORT;
+    const url = "ws://localhost:" + port + "/ws";
+    const socket = new WebSocket.w3cwebsocket(url);
+
     socket.onopen = () => {
-      console.log("connected");
+      console.log("connected", port);
       resolve(socket);
     };
     socket.onclose = () => {
