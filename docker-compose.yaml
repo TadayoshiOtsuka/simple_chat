@@ -28,3 +28,17 @@ services:
       - type: bind
         source: server/src
         target: /go/app/src
+
+  redis:
+    image: redis:7.0.2
+    command: redis-server --appendonly yes
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - type: volume
+        source: redis-volume
+        target: /data
+
+volumes:
+  redis-volume:
