@@ -1,8 +1,8 @@
 # Simple Chat
 
-Simple real-time chat app using React, Go, Websocket
+Simple real-time chat app using React, Go, Websocket, Redis(Pub/Sub)
 
-launch
+- Launch
 
 ```
 make up
