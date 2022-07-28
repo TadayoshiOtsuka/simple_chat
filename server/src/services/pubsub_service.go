@@ -22,10 +22,10 @@ func NewPubSubService() *PubSubService {
 	}
 }
 
-func (h *PubSubService) Publish(ctx context.Context, channel string, payload any) {
-	h.client.Publish(ctx, channel, payload)
+func (s *PubSubService) Publish(ctx context.Context, channel string, payload any) {
+	s.client.Publish(ctx, channel, payload)
 }
 
-func (h *PubSubService) Subscribe(ctx context.Context, channel string) <-chan *redis.Message {
-	return h.client.Subscribe(ctx, channel).Channel()
+func (s *PubSubService) Subscribe(ctx context.Context, channel string) <-chan *redis.Message {
+	return s.client.Subscribe(ctx, channel).Channel()
 }
