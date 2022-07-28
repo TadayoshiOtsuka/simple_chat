@@ -2,7 +2,6 @@ package domain
 
 import (
 	"context"
-	"log"
 
 	"github.com/TadayoshiOtsuka/simple_chat/src/services"
 )
@@ -55,7 +54,6 @@ func (h *Hub) publishMessage(msg []byte) {
 }
 
 func (h *Hub) register(c *Client) {
-	log.Println("joined")
 	h.Clients[c] = true
 }
 
