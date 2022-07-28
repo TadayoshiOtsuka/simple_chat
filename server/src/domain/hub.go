@@ -14,7 +14,7 @@ type Hub struct {
 	pubsub       *services.PubSubService
 }
 
-const sendMessageKey = "send-message"
+const broadCastChan = "broadcast"
 
 func NewHub(pubsub *services.PubSubService) *Hub {
 	return &Hub{
@@ -42,7 +42,7 @@ func (h *Hub) RunLoop() {
 }
 
 func (h *Hub) SubscribeMessages() {
-	ch := h.pubsub.Subscribe(context.TODO(), sendMessageKey)
+	ch := h.pubsub.Subscribe(context.TODO(), broadCastChan)
 
 	for msg := range ch {
 		h.broadCastToAllClient([]byte(msg.Payload))
@@ -50,7 +50,7 @@ func (h *Hub) SubscribeMessages() {
 }
 
 func (h *Hub) publishMessage(msg []byte) {
-	h.pubsub.Publish(context.TODO(), sendMessageKey, msg)
+	h.pubsub.Publish(context.TODO(), broadCastChan, msg)
 }
 
 func (h *Hub) register(c *Client) {
