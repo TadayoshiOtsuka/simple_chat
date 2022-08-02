@@ -37,6 +37,11 @@ func (h *Hub) RunLoop() {
 
 		case msg := <-h.BroadcastCh:
 			h.publishMessage(msg)
+
+		default:
+			{
+				// noop
+			}
 		}
 	}
 }
